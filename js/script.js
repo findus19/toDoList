@@ -7,23 +7,6 @@ let input = document.querySelector('input.header-input'),
     ulToDoComplete = document.querySelector('ul.todo-completed');
 
 
-
-/* function loadToDoComplete(){
-    const dataComplete = localStorage.getItem('itemsComplete');
-    if(dataComplete){
-        ulToDoComplete.innerHTML = dataComplete;
-    }
-    const btnRemoveLoad = document.querySelectorAll('button.todo-remove');
-    for(const button of btnRemoveLoad){
-        removeToDo(button);
-    } 
-};
-
-
-loadToDoComplete() */
-
-
-
 const addToDo = function(){
 
     event.preventDefault();
@@ -46,8 +29,9 @@ const addToDo = function(){
     input.value = '';
     
     localStorage.setItem("items", ulToDo.innerHTML);
-
+    console.log(textLi)
     removeToDo(btnRemove);
+    console.log(btnComplete.classList.add('todo-complete'));
     completeToDo(btnComplete, textLi);
 };
 
@@ -96,13 +80,10 @@ function loadToDo(){
     for(const button of btnRemoveLoad){
         removeToDo(button);
     }
-    const btnCompleteLoad = document.querySelectorAll('button.todo-complete');
-    const liToDoLoad = document.querySelectorAll('li.todo-item')
-    for(const button of btnCompleteLoad){
-        for(const text of liToDoLoad){
-            completeToDo(button, text);
-        };
-    }   
+    
+          //  completeToDo(btnCompleteLoad, liToDoLoad);
+
+    //}   
 };
 function loadToDoComplete(){
     const data = localStorage.getItem('itemsComplete');
@@ -115,29 +96,46 @@ function loadToDoComplete(){
     }     
 };
 
-/* function complateLoadToDo(){
-    const btnCompleteLoad = document.querySelectorAll('button.todo-complete');
-    const liToDoLoad = document.querySelectorAll('li.todo-item')
-    for(const button of btnCompleteLoad){
-        for(const text of liToDoLoad){
-            completeToDo(button, text);
-        };
-    }  
-}; */
+
 
 loadToDo();
 loadToDoComplete();
+const btnCompleteLoad = document.querySelector('button.todo-complete');
+//console.log(btnCompleteLoad);
+const liToDoLoad = document.querySelector('li.todo-item');
+//console.log(liToDoLoad);
+//for(const button of btnCompleteLoad){
+btnCompleteLoad.addEventListener('click', function() {
+    ulToDoComplete.appendChild(liToDoLoad)
+    localStorage.setItem("items", ulToDo.innerHTML);
+    localStorage.setItem("itemsComplete", ulToDoComplete.innerHTML);
+});
 /* complateLoadToDo(); */
 
 
+/* local = {
+    btn: '',
+    liLoad: ''
+}
+const btnCompleteLoad = document.querySelectorAll('button.todo-complete');
+localStorage.setItem('task', JSON.stringify(itemsArray));
+const liToDoLoad = document.querySelectorAll('li.todo-item');
+
+const dataLoad = JSON.parse(localStorage.getItem('task'));
+
+local.btn = btnCompleteLoad;
+local.liLoad = liToDoLoad;
+
+const liTasks = document.createElement('li');
+liTasks.innerHTML = dataLoad
+ulToDo.appendChild(liTasks);
+let itemsArray = [];
 
 
-/* btnRemoeLoad.addEventListener("click", () => {
-    event.preventDefault();
-    ul.innerHTML = "";
-    localStorage.removeItem('items', ulToDo.innerHTML);
-}); */
 
-//constbtnRemove = document.querySelectorAll('button.todo-remove');
+itemsArray.push(local.btn)
+itemsArray.push(local.liLoad)
+localStorage.setItem('task', JSON.stringify(itemsArray))
 
-//localStorage.setItem('itemsComplete', ulToDoComplete.innerHTML);
+ */
+
